@@ -14,13 +14,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoContacto"
         tools:targetApi="31">
+
         <activity
             android:name=".DetailActivity"
             android:exported="false">
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+            <data android:type="linear" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
         </activity>
+
         <activity
             android:name=".MainActivity"
             android:exported="true">

@@ -3,6 +3,7 @@ package com.miguelgallardocastillo.proyectocontacto
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.miguelgallardocastillo.proyectocontacto.databinding.ViewContactoItemBinding
@@ -22,12 +23,13 @@ class ContactoAdapter (val contacto: List<Contacto>, val listener: (Contacto) ->
 
         val contactoActual = contacto[position]
         holder.bind(contactoActual)
+        //El click se hace sobre la vista, que está contenida en el viewHolder.
             holder.itemView.setOnClickListener{
             listener(contactoActual)
         }
     }
 
-    //Devuelve el número de elementos.
+    //Devuelve el número de elementos de la lista que pasa como parámetro.
     override fun getItemCount(): Int {
         return contacto.size
     }
@@ -43,15 +45,17 @@ class ContactoAdapter (val contacto: List<Contacto>, val listener: (Contacto) ->
         val binding = ViewContactoItemBinding.bind(view)
 
         fun bind(contacto: Contacto){
-            Glide.with(binding.imagenContacto).load(contacto.imagen).into(binding.imagenContacto)
             binding.nombreContacto.text = contacto.nombre
             binding.telContacto.text = contacto.tel
             binding.emailContacto.text = contacto.correo
+            binding.apply { imagenContacto.glide(contacto.imagen) }
         }
 
     }
 
+}
 
-
+fun ImageView.glide(url: String){
+    Glide.with(this).load(url).into(this)
 
 }
